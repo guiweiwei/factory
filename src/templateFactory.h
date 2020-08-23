@@ -2,7 +2,7 @@
 #include <iostream>
 
 template <typename T, typename ... Args>
-T* __new(const Args&...args)
+T* __new(Args&&...args)
 {
 	return new T(args...);
 }
@@ -37,7 +37,7 @@ class templateFactory
 {
 public:
 	template <typename ... Args>
-	T* createFactory(const Args&...args)
+	T* createFactory(Args&&...args)
 	{
 		std::cout << "normal mode create" << std::endl;
 		return new T(args...);
@@ -50,7 +50,7 @@ class templateFactory<T, pool_mode>
 {
 public:
 	template <typename ... Args>
-	T* createFactory(const Args&...args)
+	T* createFactory(Args&&...args)
 	{
 		std::cout << "pool mode create" << std::endl;
 		void* addr = m_pool.allocate();
@@ -66,19 +66,19 @@ class Factory
 {
 public:
 	template <typename ... Args>
-	SignalItemData* createItem(const Args&... args)
+	SignalItemData* createItem(Args&&... args)
 	{
 		return m_itemFactory.createFactory(args...);
 	}
 
 	template <typename ... Args>
-	SignalHeadInfo* createHeader(const Args& ... args)
+	SignalHeadInfo* createHeader(Args&& ... args)
 	{
 		return m_headerFactory.createFactory(args...);
 	}
 
 	template <typename ... Args>
-	SignalValueInfo* createValue(const Args& ... args)
+	SignalValueInfo* createValue(Args&& ... args)
 	{
 		return m_valueFactory.createFactory(args...);
 	}

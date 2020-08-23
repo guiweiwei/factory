@@ -1,4 +1,5 @@
 #include "templateFactory.h"
+#include "test.h"
 
 class F
 {
@@ -28,4 +29,7 @@ int main()
 	auto k2 = dFactory.createValue(2, 3);
 
 	auto x2 = OBJECT_NEW(F, 1);
+
+	//DriveTest1<SignalValueInfo> tt;
+	//tt.create(1, 2);
 }
