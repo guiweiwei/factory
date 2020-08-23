@@ -7,18 +7,18 @@ public:
 	F(int i) {}
 };
 
-void test(DEFAULT_FACTORY* factory)
+void test(DEFAULT_FACTORY_HOLDER* factory)
 {
 	auto z = factory->createHeader(2.0);
 }
 
 int main()
 {
-	templateFactory<F, pool_mode>* factory = new templateFactory<F, pool_mode>;
+	TemplateFactory<F, pool_mode>* factory = new TemplateFactory<F, pool_mode>;
 
-	F *x = factory->createFactory(1);
+	F *x = factory->createProduct(1);
 
-	DEFAULT_FACTORY dFactory;
+	DEFAULT_FACTORY_HOLDER dFactory;
 
 	auto y = dFactory.createItem(1);
 
@@ -30,6 +30,8 @@ int main()
 
 	auto x2 = OBJECT_NEW(F, 1);
 
+	TemplateFactory<SignalItemData, system_mode> heihei;
+	heihei.createProduct();
 	//DriveTest1<SignalValueInfo> tt;
 	//tt.create(1, 2);
 }
